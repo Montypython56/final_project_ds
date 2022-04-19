@@ -1,18 +1,13 @@
 # Final Project for Intro to Data Science
 
-## Term YYYY
+## Term SP2022
 
 Team members: 
 
-- Student 1: [Rei Sanchez-Arias](mailto:rsanchezarias@floridapoly.edu)
+- Student 1: [Griffin Sun](mailto:gsun8133@floridapoly.edu)
 
-- Student 2: [Student name](mailto:student2@floridapoly.edu)
-
-- Student 3: [Student name](mailto:student3@floridapoly.edu)
 
 
 **Summary**
 
-Our project investigates the main characteristics of popular movies in recent years.
-We will be using the data available at: 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv> 
+My project analyzes the relationship between a song's billboard rating and its dancability, energy, and loudness. This project will also analyze which attrivute had a greater affect on the song's billboard ranking. 

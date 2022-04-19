@@ -7,12 +7,12 @@ output: html_notebook
 
 ## Section 1. Introduction
 
-Include a brief **introduction or motivation** here
+I will use the data set "all_billboard_summer_hits.csv" to see whether dancability, energy, or loudness had a greater effect on bilboard ranking. 
 
 ## Section 2. Data Analysis Plan
 
-List any **initial questions** you plan to explore in this project. 
+did dancability, energy, or loudness have a greater effect on bilboard ranking. if so, how much did it affect the ranking / rank the importance. 
 
 ## Section 3. Data
 
-Include a brief **description of your dataset** (source, available attributes, format, etc.)
+the all_billboard_summer_hits.csv from spotify. 
