@@ -1,0 +1,12 @@
+---
+title: "data"
+author: "Griffin Sun"
+date: "4/18/2022"
+output: html_document
+---
+```{r}
+library(tidyverse)
+myurl  <- "https://raw.githubusercontent.com/Montypython56/datasets/master/all_billboard_summer_hits.csv"
+mydata <- read_csv(myurl)
+```
+

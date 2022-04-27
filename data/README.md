@@ -1,14 +1,12 @@
-# Data Description: IMDB popular movies data
+# Data Description: All Billborard Summer Hits 
 
-(this is an example only. Edit this file as you see fit. It is recommended that you also include a copy of the original data used for this project in this folder - typically in `.csv` format)
+We use the `top50.csv` dataset available at 
+<https://www.kaggle.com/datasets/leonardopena/top50spotify2019?resource=download>
 
-We use the `IMDB_movies.csv` dataset available at 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv>
+This dataset contains the top 50 songs on Spotify in 2019. 
 
-This dataset includes information of popular movies on IMDB in the last 10 years. 
+The data fields included are: danceability, energy,key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration, time signature, key mode, track, artist, album, popularity and track identifiers.  
 
-The data fields included are: Title, Genre, Description, Director, Actors, Year, Runtime, Rating, Votes, Revenue, Metascore (score of the movie on the metacritic website)
-
-Below we include some basic statistics for this datasets, including dimensions and range of years ...
-
-(add basic summary if needed. Notice that the information above can be reused for one of the sections for the final project report)
+Below we include some basic statistics for this data sets, including dimensions and range of years
+The dataset has 50 tracks from 2019 with 14 variables. 
+...

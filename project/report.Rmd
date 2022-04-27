@@ -1,13 +1,66 @@
 ---
 title: "Final Report for Intro to Data Science"
+author: "Griffin Sun"
 output: html_notebook
 ---
 
-This is where the final project report write-up goes. 
+# Introduction
+<p> Hello, I am Griffin Sun and this is my Final project for Intro to Data science. The data set I am using has collated the top 50 songs on Spotify in 2019 and characterizes the songs by certain attributes such as </p>
+  * Dance-ability
+  * Energy
+  * Loudness
+  
+<p> We all know the four chords that pervade modern music but I want to see if attributes like a songs dance-ability or energy have an effect on its popularity. </p> 
+
+# Preparation
+
+lock and load the packages
+```{r}
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("dplyr")
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+```
+
+Load the data
+```{r}
+library(readr)
+dat <- read_csv("top50.csv")
+```
+
+# Analysis
+
+## Averages and Range
 
 
-Before you submit, make sure everything runs as expected.
+```{r}
+#prepare the data to chart
+dance<- "#ff825c"
+energy<- "#88a44e"
+loud<- "#1e9e9e"
+BP<- "#c7993b"
+val<- "#a1a141"
 
-You can add sections as you see fit. Make sure you have a section called "Introduction" at the beginning and a section called "Conclusion" at the end. The rest is up to you!
+dat%>%
+  ggplot()+
+  geom_boxplot(aes(x="danceability",y=Danceability,color=dance,))+
+  geom_boxplot(aes(x="Energy",y=Energy,color=energy))+
+  geom_boxplot(aes(x="BPM",y=Beats.Per.Minute,color=BP))+
+  geom_boxplot(aes(x="Valence",y=Valence.,color=val))+
+  labs(y="value", legend.position="none", )
 
-_Make use of your knowledge of Markdown to appropriately typeset this report!_
+```
+
+<p> This chart tells us that over the past that at an attribute level, the ingredients for a summer hit haven't changed.</p>
+
+```{r}
+dat%>%
+  ggplot()+
+  geom_boxplot(aes(x="Loudness",y=Loudness,color=loud))
+```
+```{r}
+
+```
+
