@@ -1,7 +1,9 @@
 ---
 title: "Final Report for Intro to Data Science"
 author: "Griffin Sun"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 # Introduction
@@ -9,6 +11,8 @@ output: html_notebook
   * Dance-ability
   * Energy
   * Loudness
+  * Valence
+  * Beats Per Minute
   
 <p> We all know the four chords that pervade modern music but I want to see if attributes like a songs dance-ability or energy have an effect on its popularity. </p> 
 
@@ -16,9 +20,14 @@ output: html_notebook
 
 lock and load the packages
 ```{r}
-install.packages("tidyverse")
-install.packages("ggplot2")
-install.packages("dplyr")
+#install.packages("tidyverse")
+#install.packages("ggplot2")
+#install.packages("dplyr")
+#install.packages("ggcorrplot")
+
+```
+```{r}
+library(ggcorrplot)
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
@@ -47,20 +56,73 @@ dat%>%
   ggplot()+
   geom_boxplot(aes(x="danceability",y=Danceability,color=dance,))+
   geom_boxplot(aes(x="Energy",y=Energy,color=energy))+
-  geom_boxplot(aes(x="BPM",y=Beats.Per.Minute,color=BP))+
   geom_boxplot(aes(x="Valence",y=Valence.,color=val))+
-  labs(y="value", legend.position="none", )
+  labs(y="value" )+
+  theme(legend.position="none")
 
 ```
 
-<p> This chart tells us that over the past that at an attribute level, the ingredients for a summer hit haven't changed.</p>
+<p> These bar charts show the music tastes in 2019. We can assume that since the data set pulled the top 50 songs that this attribute set would be representative of the wider population. We see that in 2019 high energy, highly dance-able songs were were quite popular. A prime example from the data set would be "China" by Annuel AA which peaked at #1 on the Hot Latin songs chart and #43 on the Billboard Hot 100. Valence is a measure of a song's mood ranging from 0 - 100, the higher the number the more upbeat the song.In 2019 we can see that people favored songs with a more neutral to upbeat mood like Post Malone's "Sunflower" or Billie Ellish's "Bad guy. </p>
 
 ```{r}
 dat%>%
   ggplot()+
-  geom_boxplot(aes(x="Loudness",y=Loudness,color=loud))
+  geom_boxplot(aes(x="BPM",y=Beats.Per.Minute,color=BP))+
+  theme(legend.position="none")
+  
 ```
-```{r}
+<p>Beats Per Minute is the tempo of a song. Tempo can effect a song's textural qualities and feel, songs with a higher tempo may feel lighter or more joyful while songs with a lower tempo may feel thicker or more calm. In classical music theory, songs with a tempo around 100-120 BPM are typically seen as lighter happy songs, while songs around 150 BPM can seem stressful. The musical trend for 2019 favored these lighter higher tempo songs like Meduza's "Piece of Your Heart". </p>
 
+```{r}
+dat%>%
+  ggplot()+
+  geom_boxplot(aes(x="Loudness",y=Loudness,color=loud))+
+  theme(legend.position="none")
+```
+<p>Loudness describes how loud a song is, the closer to 0 the value is the louder the song is. The top 50 billboard songs for 2019 were attenuated to -6dB, which is a fair bit louder than the -14 dB that Spotify normalizes songs to. This suggests that in 2019 louder songs were favored over quieter songs. </p>
+
+```{r}
+dat%>%
+  ggplot()+
+  geom_point(aes(x= Popularity, y= Danceability))+
+  geom_smooth(aes(x= Popularity, y= Danceability),method = lm,)
+m1<-lm(dat$Danceability~dat$Popularity)
+summary(m1)
+dat%>%
+  ggplot()+
+  geom_point(aes(x= Popularity, y= Energy))+
+  geom_smooth(aes(x= Popularity, y= Energy),method = lm,)
+m2<-lm(dat$Energy~dat$Popularity)
+summary(m2)
+dat%>%
+  ggplot()+
+  geom_point(aes(x= Popularity, y= Loudness))+
+  geom_smooth(aes(x= Popularity, y= Loudness),method = lm,)
+m3<-lm(dat$Loudness~dat$Popularity)
+summary(m3)
+dat%>%
+  ggplot()+
+  geom_point(aes(x= Popularity, y= Beats.Per.Minute))+
+  geom_smooth(aes(x= Popularity, y= Beats.Per.Minute),method = lm,)+
+  labs(y="Tempo")
+m4<-lm(dat$Beats.Per.Minute~dat$Popularity)
+summary(m4)
+```
+<p>These plots show the relationship between the Attributes and the song's popularity. The trend lines which would normally show if there is a linear relationship between the variables were all insignificant with the exception of Energy and Tempo. Without the trend lines we can see from the concentration of the data points that there is an association the trend line may have missed.</p>
+
+## Danceability vs Popularity
+<p>The high concentration of points in the high dance-ability, high popularity sector of the chart suggests that more dance-able songs are likely to be more popular. Though the trend line reads as inconclusive the association between dance-ability and popularity is fairly clear.</p>
+
+## Energy vs Popularity
+<p>The scattered points with low to medium concentration around the 60 value suggests that there is little to no correlation between energy and popularity. The concentration around the 60s shows that artists created more songs with a moderate energy, while the consumers had no tendency to favor songs with a higher or lower energy. </p>
+```{r}
+rdat<-(dat%>%
+         select(Beats.Per.Minute,Energy,Valence.,Danceability,Loudness,Popularity))
+  corr<- round(cor(rdat),1)
+pmat<-cor_pmat(rdat)
+
+ggcorrplot(corr,method = "circle")
+ggcorrplot(corr, method = "circle",hc.order = TRUE,
+    type = "lower", p.mat = pmat)
 ```
 
