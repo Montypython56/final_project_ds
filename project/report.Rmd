@@ -115,6 +115,14 @@ summary(m4)
 
 ## Energy vs Popularity
 <p>The scattered points with low to medium concentration around the 60 value suggests that there is little to no correlation between energy and popularity. The concentration around the 60s shows that artists created more songs with a moderate energy, while the consumers had no tendency to favor songs with a higher or lower energy. </p>
+
+## Loudness vs Popularity
+<p>The concentration for loudness slightly trends towards the upper right quadrant showing that louder songs tended to be more popular. The concentration however may be biased since most of the songs are only slightly louder than the median and there is a significant amount of quieter songs in the range as well. This suggests that there is little to no correlation.</p>
+
+## Tempo vs Popularity
+<p>The concetration for Tempo vs Popularity is skewed since the majority of the songs in the dataset have tempos near 100 BPM. However we can see that songs with a higher BPM are almost always more popular, however there are no significantly slower songs that are less popular in the data set.</p>
+
+## Attribute Correlation
 ```{r}
 rdat<-(dat%>%
          select(Beats.Per.Minute,Energy,Valence.,Danceability,Loudness,Popularity))
@@ -125,4 +133,7 @@ ggcorrplot(corr,method = "circle")
 ggcorrplot(corr, method = "circle",hc.order = TRUE,
     type = "lower", p.mat = pmat)
 ```
+<p>The correlelograms show the correlation between the various attributes. Larger circles emphasize the degree of correlation while the shade shows positive or negative. The second correlelogram with the "x"s shows which correlations are significant. We can see that there are correlations between Loudness and energy, Popularity and Valence, and Valence and energy.</p>
 
+# Conclusions
+<p>The scope of the data set was too small to make any concrete conclusions on how to make the ideal billboard hit, however it shows that there is enough of a correlation to warrant and expanded investigation. The correlations between valence and popularity, and their correlary relationships could be used to make audience optimized music in the future.</p>
